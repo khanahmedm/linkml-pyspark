@@ -1,0 +1,31 @@
+
+id: cluster-schema
+name: ClusterSchema
+classes:
+  Cluster:
+      attributes:
+        cluster_id:
+          description: Internal (CDM) unique identifier.
+          identifier: true
+          range: UUID
+          required: true
+        description:
+          description: Description of the cluster.
+        protocol_id:
+          description: Protocol used to generate the cluster.
+      description: Represents an individual execution of a clustering protocol. See the Cluster_X_Protein class for clustering results.
+
+  Cluster_X_Protein:
+    attributes:
+      cluster_id:
+        range: UUID
+        required: true
+        description: Internal (CDM) unique identifier.
+      protein_id:
+        range: UUID
+        required: true
+        description: Internal (CDM) unique identifier for a protein within a cluster.
+      score:
+        range: float
+        description: Output from clustering protocol.
+    description: Relationship representing membership of a cluster. An optional score can be assigned to each cluster member.

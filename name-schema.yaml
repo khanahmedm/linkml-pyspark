@@ -1,0 +1,74 @@
+id: name-schema
+name: NameSchema
+classes:
+  NamedThing:
+    abstract: true
+    attributes:
+      description:
+        description: Definition or description of the entity.
+      names:
+        description: Names, alternative names, and synonyms for an entity.
+        multivalued: true
+        range: Name
+    description: Abstract class to represent things with names.
+
+  NamedThingWithId:
+    abstract: true
+    attributes:
+      identifiers:
+        description: URIs or CURIEs used to refer to this entity.
+        multivalued: true
+        range: Identifier
+    description: Abstract class to represent things with names and identifiers.
+    is_a: NamedThing
+
+  Name:
+    attributes:
+      description:
+        description: Brief description of the name and/or its relationship to the entity.
+        examples:
+          - value: "UniProt: Full name"
+      entity_id:
+        description: The entity to which the name refers.
+        required: true
+      name:
+        description: The string used as a name.
+        identifier: true
+        required: true
+        slot_uri: schema:name
+        examples:
+          - value: Heat-inducible transcription repressor HrcA
+          - value: Uncharacterized protein 002R
+      source:
+        description: The data source for the name.
+        examples:
+          - value: NCBI
+          - value: KE-Pangenomes
+          - value: TrEMBL
+    description: The name or label for an entity.
+
+  Identifier:
+    attributes:
+      description:
+        description: Brief description of the identifier and/or its relationship to the entity.
+      entity_id:
+        description: Internal (CDM) unique identifier for the entity that has the identifiers.
+        range: UUID
+        required: true
+      identifier:
+        identifier: true
+        description: Fully-qualified URL or CURIE used as an identifier for an entity.
+        range: uriorcurie
+        required: true
+        slot_uri: schema:identifier
+        examples:
+          - value: "UniProt:Q8KCD6"
+          - value: "EC:5.2.3.14"
+      source:
+        description: The data source for the identifier. Should be a ROR ID.
+        range: uriorcurie
+        examples:
+          - value: UniProt
+          - value: NCBI
+          - value: KE-Pangenomes
+    description: An external identifier for an entity.

@@ -1,0 +1,16 @@
+id: ecommerce-schema
+name: EcommerceSchema
+classes:
+  Product:
+    slots:
+      - product_id
+      - name
+      - price
+slots:
+  product_id:
+    identifier: true
+    range: string
+  name:
+    range: string
+  price:
+    range: float
